@@ -1,0 +1,1 @@
+module.exports.populatePrivate = require('./src/populatePrivate.plugin');
