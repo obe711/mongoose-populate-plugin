@@ -89,7 +89,16 @@ const populatePrivate = (schema) => {
         }
     });
 
+
+
     schema.pre('find', function () {
+        Object.keys(schema.virtuals).map(path => {
+            schema.virtuals[path].options.hasOwnProperty("ref")
+                && this.populate({ path: schema.virtuals[path].path, select: " -createdAt -updatedAt -__v" });
+        });
+    });
+
+    schema.pre('findOne', function () {
         Object.keys(schema.virtuals).map(path => {
             schema.virtuals[path].options.hasOwnProperty("ref")
                 && this.populate({ path: schema.virtuals[path].path, select: " -createdAt -updatedAt -__v" });
