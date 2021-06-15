@@ -58,7 +58,8 @@ const populatePrivate = (schema) => {
              *  Remove '_id', '__v', 'updatedAt' from JSON
             */
 
-            ret.id = ret._id.toString();
+            if (ret._id)
+                ret.id = ret._id.toString();
             delete ret._id;
             delete ret.__v;
             if (transform) {
